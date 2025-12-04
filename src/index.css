@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* CJ & Shan Grand Resort Color Palette */
+    --forest-green: 158 70% 14%;
+    --palm-green: 146 51% 36%;
+    --sand-beige: 40 47% 91%;
+    --warm-brown: 36 41% 39%;
+    --cream-white: 45 40% 97%;
+    --deep-teal: 168 45% 20%;
+    
+    /* Semantic tokens */
+    --background: 45 40% 97%;
+    --foreground: 158 70% 14%;
+    
+    --card: 40 47% 91%;
+    --card-foreground: 158 70% 14%;
+    
+    --popover: 45 40% 97%;
+    --popover-foreground: 158 70% 14%;
+    
+    --primary: 158 70% 14%;
+    --primary-foreground: 45 40% 97%;
+    
+    --secondary: 146 51% 36%;
+    --secondary-foreground: 45 40% 97%;
+    
+    --muted: 40 30% 85%;
+    --muted-foreground: 158 40% 30%;
+    
+    --accent: 36 41% 39%;
+    --accent-foreground: 45 40% 97%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 40 30% 80%;
+    --input: 40 30% 85%;
+    --ring: 146 51% 36%;
+    
+    --radius: 0.75rem;
+    
+    /* Custom shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(158 70% 14% / 0.15);
+    --shadow-elevated: 0 8px 40px -8px hsl(158 70% 14% / 0.2);
+    --shadow-card: 0 2px 12px -2px hsl(36 41% 39% / 0.12);
+    
+    /* Textures */
+    --texture-wood: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    --texture-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .dark {
+    --background: 158 70% 8%;
+    --foreground: 40 47% 91%;
+    --card: 158 60% 12%;
+    --card-foreground: 40 47% 91%;
+    --popover: 158 70% 10%;
+    --popover-foreground: 40 47% 91%;
+    --primary: 146 51% 45%;
+    --primary-foreground: 158 70% 8%;
+    --secondary: 36 41% 45%;
+    --secondary-foreground: 158 70% 8%;
+    --muted: 158 40% 20%;
+    --muted-foreground: 40 30% 70%;
+    --accent: 40 47% 75%;
+    --accent-foreground: 158 70% 8%;
+    --border: 158 40% 20%;
+    --input: 158 40% 18%;
+    --ring: 146 51% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-image: var(--texture-grain);
+    background-blend-mode: overlay;
+  }
+}
+
+@layer components {
+  /* Curved Section Dividers */
+  .curve-divider-top {
+    position: relative;
+  }
+  
+  .curve-divider-top::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: inherit;
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .curve-divider-bottom {
+    position: relative;
+  }
+  
+  .curve-divider-bottom::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: inherit;
+    clip-path: ellipse(55% 100% at 50% 0%);
+    z-index: 10;
+  }
+
+  /* Wave Divider */
+  .wave-divider {
+    position: relative;
+  }
+  
+  .wave-divider::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: inherit;
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,15 C200,30 400,0 600,15 C800,30 1000,0 1200,15 L1200,30 L0,30 Z' fill='black'/%3E%3C/svg%3E");
+    mask-size: 100% 100%;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,15 C200,30 400,0 600,15 C800,30 1000,0 1200,15 L1200,30 L0,30 Z' fill='black'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+  }
+
+  /* Polaroid Card Style */
+  .polaroid-card {
+    @apply bg-cream p-3 pb-6;
+    box-shadow: 0 8px 40px -8px hsl(158 70% 14% / 0.2);
+    transform: rotate(-2deg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .polaroid-card:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 0 12px 50px -8px hsl(158 70% 14% / 0.25);
+  }
+
+  /* Handwritten Label */
+  .handwritten-label {
+    @apply font-display italic text-sm text-accent;
+    transform: rotate(-3deg);
+  }
+
+  /* Wood Texture Background */
+  .wood-texture {
+    background-color: hsl(var(--warm-brown) / 0.1);
+    background-image: var(--texture-wood);
+  }
+
+  /* Leaf Shadow Overlay */
+  .leaf-shadow {
+    position: relative;
+  }
+  
+  .leaf-shadow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 20%,
+      hsl(var(--forest-green) / 0.05) 40%,
+      transparent 60%,
+      hsl(var(--palm-green) / 0.08) 80%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Natural Button Styles */
+  .btn-resort {
+    @apply relative overflow-hidden px-8 py-4 font-display font-medium tracking-wide transition-all duration-300;
+    background: linear-gradient(135deg, hsl(var(--forest-green)), hsl(var(--palm-green)));
+    color: hsl(var(--sand-beige));
+    border-radius: 50px 10px 50px 10px;
+    box-shadow: 0 4px 15px hsl(var(--forest-green) / 0.3);
+  }
+  
+  .btn-resort:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px hsl(var(--forest-green) / 0.4);
+  }
+  
+  .btn-resort::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--cream-white) / 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .btn-resort:hover::after {
+    left: 100%;
+  }
+
+  /* Organic Card */
+  .organic-card {
+    @apply relative p-6 overflow-hidden;
+    background: linear-gradient(145deg, hsl(var(--sand-beige)), hsl(var(--cream-white)));
+    border-radius: 30px 10px 30px 10px;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .organic-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, hsl(var(--palm-green) / 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Asymmetric Grid Item */
+  .masonry-item:nth-child(odd) {
+    @apply mt-8;
+  }
+  
+  .masonry-item:nth-child(3n) {
+    @apply -mt-4;
+  }
+
+  /* Floating Animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+  }
+  
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Parallax Scroll */
+  .parallax-slow {
+    will-change: transform;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .custom-scroll::-webkit-scrollbar-track {
+    background: hsl(var(--sand-beige));
+    border-radius: 10px;
+  }
+  
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: hsl(var(--palm-green) / 0.5);
+    border-radius: 10px;
+  }
+  
+  .custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--palm-green));
+  }
+}
+
+@layer utilities {
+  .bg-forest { background-color: hsl(var(--forest-green)); }
+  .bg-palm { background-color: hsl(var(--palm-green)); }
+  .bg-sand { background-color: hsl(var(--sand-beige)); }
+  .bg-brown { background-color: hsl(var(--warm-brown)); }
+  .bg-cream { background-color: hsl(var(--cream-white)); }
+  .bg-teal { background-color: hsl(var(--deep-teal)); }
+  
+  .text-forest { color: hsl(var(--forest-green)); }
+  .text-palm { color: hsl(var(--palm-green)); }
+  .text-sand { color: hsl(var(--sand-beige)); }
+  .text-brown { color: hsl(var(--warm-brown)); }
+  .text-cream { color: hsl(var(--cream-white)); }
+  
+  .border-forest { border-color: hsl(var(--forest-green)); }
+  .border-palm { border-color: hsl(var(--palm-green)); }
+  .border-sand { border-color: hsl(var(--sand-beige)); }
+  .border-brown { border-color: hsl(var(--warm-brown)); }
+
+  .shadow-resort { box-shadow: 0 4px 20px -4px hsl(158 70% 14% / 0.15); }
+  .shadow-resort-lg { box-shadow: 0 8px 40px -8px hsl(158 70% 14% / 0.2); }
+  .shadow-card { box-shadow: 0 2px 12px -2px hsl(36 41% 39% / 0.12); }
+
+  .gradient-forest {
+    background: linear-gradient(135deg, hsl(var(--forest-green)), hsl(var(--palm-green)));
+  }
+  
+  .gradient-sand {
+    background: linear-gradient(180deg, hsl(var(--sand-beige)), hsl(var(--cream-white)));
+  }
+  
+  .gradient-warm {
+    background: linear-gradient(135deg, hsl(var(--warm-brown) / 0.1), hsl(var(--sand-beige)));
+  }
+}
