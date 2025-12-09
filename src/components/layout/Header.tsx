@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User, ShoppingBag } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,15 +74,35 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Book Now Button */}
-          <Link
-            to="/booking"
-            className={`hidden lg:block btn-resort text-sm ${
-              isScrolled ? '' : 'bg-sand/20 backdrop-blur-sm border border-cream/30'
-            }`}
-          >
-            Book Your Stay
-          </Link>
+          {/* Right Side Actions */}
+          <div className="hidden lg:flex items-center gap-4">
+            <Link
+              to="/services"
+              className={`p-2 rounded-full transition-colors ${
+                isScrolled ? 'text-forest hover:bg-palm/10' : 'text-cream/90 hover:bg-cream/10'
+              }`}
+              title="Services"
+            >
+              <ShoppingBag size={20} />
+            </Link>
+            <Link
+              to="/profile"
+              className={`p-2 rounded-full transition-colors ${
+                isScrolled ? 'text-forest hover:bg-palm/10' : 'text-cream/90 hover:bg-cream/10'
+              }`}
+              title="My Profile"
+            >
+              <User size={20} />
+            </Link>
+            <Link
+              to="/booking"
+              className={`btn-resort text-sm ${
+                isScrolled ? '' : 'bg-sand/20 backdrop-blur-sm border border-cream/30'
+              }`}
+            >
+              Book Your Stay
+            </Link>
+          </div>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -117,6 +137,28 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
+          <Link
+            to="/profile"
+            onClick={() => setIsMenuOpen(false)}
+            className={`font-body text-lg py-2 border-b border-sand/30 transition-colors flex items-center gap-2 ${
+              isActive('/profile')
+                ? 'text-palm font-semibold'
+                : 'text-forest hover:text-palm'
+            }`}
+          >
+            <User size={18} /> My Profile
+          </Link>
+          <Link
+            to="/services"
+            onClick={() => setIsMenuOpen(false)}
+            className={`font-body text-lg py-2 border-b border-sand/30 transition-colors flex items-center gap-2 ${
+              isActive('/services')
+                ? 'text-palm font-semibold'
+                : 'text-forest hover:text-palm'
+            }`}
+          >
+            <ShoppingBag size={18} /> Services
+          </Link>
           <Link
             to="/booking"
             onClick={() => setIsMenuOpen(false)}
