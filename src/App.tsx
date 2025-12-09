@@ -8,6 +8,7 @@ import Rooms from "./pages/Rooms";
 import Amenities from "./pages/Amenities";
 import About from "./pages/About";
 import Booking from "./pages/Booking";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/amenities" element={<Amenities />} />
           <Route path="/about" element={<About />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
