@@ -6,7 +6,8 @@ import roomDeluxe from '@/assets/room-deluxe.jpg';
 import roomFamily from '@/assets/room-family.jpg';
 import roomHoneymoon from '@/assets/room-honeymoon.jpg';
 import roomGarden from '@/assets/room-garden.jpg';
-import { Calendar, Users, CreditCard, Check, ChevronRight, Wallet } from 'lucide-react';
+import { Calendar, Users, CreditCard, Check, ChevronRight } from 'lucide-react';
+import PaymentGateway from '@/components/booking/PaymentGateway';
 import { toast } from '@/hooks/use-toast';
 
 const roomOptions = [
@@ -337,31 +338,13 @@ const Booking = () => {
                     />
                   </div>
 
-                  {/* Payment Methods */}
+                  {/* Payment Gateway */}
                   <div className="mb-8">
-                    <label className="block font-display text-sm text-forest mb-3 font-medium">
-                      Payment Method
-                    </label>
-                    <div className="flex flex-wrap gap-3">
-                      {[
-                        { id: 'gcash', label: 'GCash', icon: Wallet },
-                        { id: 'paypal', label: 'PayPal', icon: CreditCard },
-                        { id: 'card', label: 'Credit Card', icon: CreditCard },
-                      ].map((method) => (
-                        <button
-                          key={method.id}
-                          onClick={() => setFormData({ ...formData, paymentMethod: method.id })}
-                          className={`flex items-center gap-2 px-4 py-2 rounded-pill border-2 transition-all ${
-                            formData.paymentMethod === method.id
-                              ? 'border-palm bg-palm/10 text-forest'
-                              : 'border-sand text-muted-foreground hover:border-palm/50'
-                          }`}
-                        >
-                          <method.icon className="w-4 h-4" />
-                          <span className="font-body text-sm">{method.label}</span>
-                        </button>
-                      ))}
-                    </div>
+                    <PaymentGateway
+                      selectedMethod={formData.paymentMethod}
+                      onMethodChange={(method) => setFormData({ ...formData, paymentMethod: method })}
+                      totalAmount={totalPrice}
+                    />
                   </div>
 
                   <div className="flex gap-4">
